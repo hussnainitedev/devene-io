@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://devene.io/sitemap-index.xml

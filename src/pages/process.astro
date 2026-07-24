@@ -4,6 +4,15 @@ import { getFaqItems } from '../lib/data.js';
 const faqItems = await getFaqItems();
 ---
 <Base current="process" title="How We Work — Devene.io" description="Slow thinking, fast shipping. Four movements, one rhythm, and three engagement models — from a seven-day first demo to ongoing product care.">
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqItems.map((f) => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    }))
+  })} />
   <div class="page-hero">
     <span class="eyebrow">✌ how we work</span>
     <h1>Slow thinking, <em>fast shipping.</em></h1>

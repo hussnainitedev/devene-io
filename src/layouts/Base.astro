@@ -8,6 +8,9 @@ const {
   description = "Devene.io is an AI-powered software development agency. Product strategy, AI strategy, custom software, BI & data, and automation — delivered by senior humans, accelerated by AI. First working demo in 7 days.",
   current = '',
 } = Astro.props;
+
+const gaId = import.meta.env.GA_MEASUREMENT_ID;
+const gscVerification = import.meta.env.GOOGLE_SITE_VERIFICATION;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -19,17 +22,70 @@ const {
 <meta name="author" content="Devene.io">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href={new URL(Astro.url.pathname, 'https://devene.io/').toString()}>
+{gscVerification && <meta name="google-site-verification" content={gscVerification}>}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Devene.io">
 <meta property="og:title" content={title}>
 <meta property="og:description" content={description}>
 <meta property="og:url" content={new URL(Astro.url.pathname, 'https://devene.io/').toString()}>
+<meta property="og:image" content="https://devene.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content={title}>
 <meta name="twitter:description" content={description}>
+<meta name="twitter:image" content="https://devene.io/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Space+Grotesk:wght@300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://devene.io/#org",
+      "name": "Devene.io",
+      "url": "https://devene.io/",
+      "email": "hello@devene.io",
+      "slogan": "Software with soul",
+      "description": "AI-powered software development agency delivering product strategy, AI strategy, custom software, business intelligence, and automation.",
+      "knowsAbout": ["AI Strategy", "Software Development", "Business Intelligence", "Product Roadmapping", "Workflow Automation", "UX Design"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://devene.io/#site",
+      "url": "https://devene.io/",
+      "name": "Devene.io",
+      "publisher": { "@id": "https://devene.io/#org" }
+    },
+    {
+      "@type": "ProfessionalService",
+      "name": "Devene.io",
+      "url": "https://devene.io/",
+      "priceRange": "$$",
+      "makesOffer": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Strategy & Enablement" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Product Strategy & Roadmapping" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI-Powered Software Development" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Data, BI & Intelligent Reporting" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "UX & Product Design" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automation & Agentic Workflows" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Support & Continuous Care" } }
+      ]
+    }
+  ]
+})} />
+{gaId && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+    <script is:inline define:vars={{ gaId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gaId);
+    </script>
+  </>
+)}
 </head>
 <body>
   <Nav current={current} />
