@@ -50,5 +50,9 @@ export async function getSiteSettings() {
     `*[_type == "siteSettings"][0]{ email, responseTime, firstCall }`,
     null
   );
-  return result || fallback.siteSettings;
+  return {
+    email: result?.email || fallback.siteSettings.email,
+    responseTime: result?.responseTime || fallback.siteSettings.responseTime,
+    firstCall: result?.firstCall || fallback.siteSettings.firstCall,
+  };
 }
