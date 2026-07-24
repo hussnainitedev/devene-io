@@ -21,6 +21,7 @@ const bodyHtml = marked.parse(post.body);
     <h1 style="font-size:clamp(2rem,6vw,4.2rem)">{post.title}</h1>
     <div class="post-meta" style="margin-top:1.2rem"><span>✿ {post.minutes} min read</span><span>·</span><span>by {post.author}</span></div>
   </div>
+  <div class="article-hero-visual"><div class="box" aria-hidden="true">{post.glyph}</div></div>
   <section style="padding-top:1rem">
     <div class="article-body" set:html={bodyHtml} />
     <div class="article-cta">

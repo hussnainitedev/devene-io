@@ -176,6 +176,55 @@ h3{font-family:var(--display);font-weight:600;font-variation-settings:'SOFT' 100
   max-width:68ch;margin:4rem auto 0;text-align:center;
   border:1.5px solid var(--ink);border-radius:24px;padding:2.6rem 2rem;background:var(--paper);
 }
+
+/* article hero glyph banner */
+.article-hero-visual{
+  max-width:1200px;margin:0 auto 1rem;padding:0 2rem;
+}
+.article-hero-visual .box{
+  display:flex;align-items:center;justify-content:center;
+  height:220px;border:1.5px solid var(--ink);border-radius:24px;
+  background:var(--lime);font-size:6.5rem;position:relative;overflow:hidden;
+}
+.article-hero-visual .box::before{
+  content:'✿';position:absolute;top:1rem;left:1.4rem;font-size:1.4rem;color:var(--ink);opacity:.35;
+}
+.article-hero-visual .box::after{
+  content:'☮';position:absolute;bottom:1rem;right:1.4rem;font-size:1.4rem;color:var(--ink);opacity:.35;
+}
+@media (max-width:860px){
+  .article-hero-visual{padding:0 1.25rem}
+  .article-hero-visual .box{height:150px;font-size:4rem}
+}
+
+/* at-a-glance question/step grid used inside article bodies */
+.article-body .glance-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;
+  margin:2rem 0 2.6rem;
+}
+.article-body .glance-card{
+  border:1.5px solid var(--ink);border-radius:18px;padding:1.4rem;background:var(--paper);
+  transition:box-shadow .2s,transform .2s;position:relative;
+}
+.article-body .glance-card:hover{box-shadow:5px 5px 0 var(--ink);transform:translate(-2px,-2px)}
+.article-body .glance-card .gn{
+  font-family:var(--mono);font-size:.68rem;color:var(--violet);
+  border:1.5px solid var(--ink);border-radius:999px;padding:.2rem .65rem;
+  display:inline-block;margin-bottom:.7rem;
+}
+.article-body .glance-card h4{
+  font-family:var(--display);font-weight:600;font-size:1.05rem;margin-bottom:.4rem;
+  font-variation-settings:'SOFT' 100,'WONK' 1;
+}
+.article-body .glance-card p{font-size:.85rem;color:var(--grey);margin:0}
+
+/* callout box used inside article bodies */
+.article-body .callout{
+  border:1.5px solid var(--ink);border-radius:16px;background:var(--lime);
+  padding:1.3rem 1.5rem;margin:2rem 0;font-size:.98rem;
+}
+.article-body .callout b{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;display:block;margin-bottom:.4rem}
+.article-body .callout p{margin:0;color:var(--ink)}
 .newsletter{
   margin-top:3.5rem;border:1.5px solid var(--ink);border-radius:24px;
   background:var(--ink);color:var(--paper);padding:2.4rem;
