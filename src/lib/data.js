@@ -40,7 +40,7 @@ export async function getFaqItems() {
 
 export async function getBlogPosts() {
   return fetchOrFallback(
-    `*[_type == "blogPost"] | order(featured desc, _createdAt desc){ slug, tag, title, excerpt, minutes, author, featured, glyph, body }`,
+    `*[_type == "blogPost" && defined(slug.current)] | order(featured desc, _createdAt desc){ "slug": slug.current, tag, title, excerpt, minutes, author, featured, glyph, body }`,
     fallback.blogPosts
   );
 }
