@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getBlogPosts } from '../../lib/data.js';
+const posts = await getBlogPosts();
+const featured = posts.find(p => p.featured) || posts[0];
+const rest = posts.filter(p => p.slug !== featured?.slug);
+---
+<Base current="blog" title="Blog — Devene.io" description="Honest writing on AI strategy, product thinking, software delivery, and data — from the people doing the work at Devene.io.">
+  <div class="page-hero">
+    <span class="eyebrow">✌ the devene blog</span>
+    <h1>Field notes from the <em>studio.</em></h1>
+    <p class="lead">Honest writing on AI strategy, product thinking, software delivery, and data — from the people doing the work. No thought-leadership theatre.</p>
+  </div>
+
+  <section style="padding-top:1rem">
+    {featured && (
+      <a class="featured-post" href={`/blog/${featured.slug}/`}>
+        <div class="fp-left">
+          <span class="insight-tag">featured · {featured.tag}</span>
+          <h2 style="max-width:20ch">{featured.title}</h2>
+          <p class="lead">{featured.excerpt}</p>
+          <div class="post-meta"><span>✿ {featured.minutes} min read</span><span>·</span><span>by {featured.author}</span></div>
+          <span class="btn-ghost" style="margin-top:1.4rem;display:inline-block">Read the article →</span>
+        </div>
+        <div class="fp-right" aria-hidden="true">{featured.glyph}</div>
+      </a>
+    )}
+
+    <div class="blog-grid">
+      {rest.map(p => (
+        <a class="insight" href={`/blog/${p.slug}/`}>
+          <span class="insight-tag">{p.tag}</span>
+          <h3>{p.title}</h3>
+          <p>{p.excerpt}</p>
+          <div class="post-meta"><span>✿ {p.minutes} min read</span></div>
+        </a>
+      ))}
+    </div>
+
+    <div class="newsletter">
+      <div>
+        <h3 style="font-size:1.5rem">Get new posts, no spam ✿</h3>
+        <p style="color:var(--grey);font-size:.95rem;max-width:44ch">One email when we publish something worth your time. Usually monthly. Unsubscribe anytime, obviously.</p>
+      </div>
+      <form class="nl-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="nl-bot-field" id="nlForm">
+        <input type="hidden" name="form-name" value="newsletter" />
+        <p style="display:none"><label>Don't fill this out: <input name="nl-bot-field" /></label></p>
+        <input type="email" name="email" placeholder="you@company.com" aria-label="Email for newsletter" required>
+        <button class="btn" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById('nlForm');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data).toString() });
+    } catch {}
+    form.innerHTML = '<p style="font-family:var(--mono);font-size:.85rem;color:var(--lime)">✿ You\'re in. See you in your inbox, friend.</p>';
+  });
+</script>

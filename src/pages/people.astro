@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import { getTeamGroups } from '../lib/data.js';
+const teamGroups = await getTeamGroups();
+---
+<Base current="people" title="Our People — Devene.io" description="Twelve humans, zero interchangeable parts. Meet the business analysts, designers, AI engineers, and support specialists who do the work at Devene.io.">
+  <div class="page-hero">
+    <span class="eyebrow">✌ our people</span>
+    <h1>The product is <em>the people.</em></h1>
+    <p class="lead">Tools change every quarter. Good people compound forever. Here's who actually does your work — no bait-and-switch, no juniors hidden behind senior faces in the pitch.</p>
+  </div>
+
+  <section style="padding-top:1rem">
+    <span class="section-label">the crew</span>
+    <h2>Twelve humans, <em>zero interchangeable parts.</em></h2>
+    <p class="lead">Placeholder names for now — but the roles, experience, and superpowers are real. Every one of these people talks to clients directly. That's the whole point.</p>
+
+    {teamGroups.map(group => (
+      <>
+        <h3 class="crew-heading">{group.heading}</h3>
+        <div class="profile-grid">
+          {group.members.map(m => (
+            <div class="profile">
+              <div class="face">{m.glyph}</div>
+              <div class="body">
+                <h3>{m.name}</h3><div class="role">{m.role}</div>
+                <p><b>How they help you:</b> {m.help}</p>
+                <div class="exp">experience: {m.experience}</div>
+                <div class="loves">superpower: <b>{m.superpower}</b></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </>
+    ))}
+  </section>
+
+  <div class="people-band">
+    <section>
+      <span class="section-label">how we treat each other</span>
+      <h2>Happy people build <em>better software.</em></h2>
+      <p class="lead">This isn't a perk page. It's the operating model. When the team isn't burned out, churned out, or hidden behind account managers, the work shows it.</p>
+      <div class="people-grid">
+        <div class="person-card"><div class="role">No middlemen</div><p class="desc">You talk to the people doing the work. Questions get answered by whoever knows, not whoever's assigned.</p></div>
+        <div class="person-card"><div class="role">AI as amplifier</div><p class="desc">Every person here uses AI daily — to move faster, not to be replaced. Judgment stays human.</p></div>
+        <div class="person-card"><div class="role">Craft over churn</div><p class="desc">Small team, long relationships. The person who starts your project finishes it.</p></div>
+        <div class="person-card"><div class="role">Honest by default</div><p class="desc">If something's a bad idea, we'll say so — even when it costs us billable hours.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="center">
+    <span class="section-label">values</span>
+    <h2>What we <em>believe.</em></h2>
+    <div class="values-grid" style="text-align:left">
+      <div class="value"><span class="glyph">☮</span><h3>Peace with reality</h3><p>Honest estimates, honest status, honest tradeoffs. We'd rather disappoint you in week one than surprise you in month six.</p></div>
+      <div class="value"><span class="glyph">✿</span><h3>Grow things, don't assemble them</h3><p>Products are gardens, not monuments. Launch is the beginning of the interesting part.</p></div>
+      <div class="value"><span class="glyph">☼</span><h3>Light over heat</h3><p>Clarity beats cleverness. In our code, our decks, and our conversations with you.</p></div>
+      <div class="value"><span class="glyph">♡</span><h3>People first, always</h3><p>Yours and ours. Software is made by people, for people. Everything else is tooling.</p></div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <section>
+      <span class="sun" aria-hidden="true">☼</span>
+      <h2>Want these people <em>on your thing?</em></h2>
+      <a class="btn" href="/contact/" style="margin-top:1rem">Start a project</a>
+    </section>
+  </div>
+</Base>

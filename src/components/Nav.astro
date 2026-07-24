@@ -1,0 +1,36 @@
+---
+const { current = '' } = Astro.props;
+const links = [
+  { page: 'services', href: '/services/', label: 'services' },
+  { page: 'people', href: '/people/', label: 'our people' },
+  { page: 'work', href: '/work/', label: 'case studies' },
+  { page: 'process', href: '/process/', label: 'how we work' },
+  { page: 'blog', href: '/blog/', label: 'blog' },
+];
+---
+<nav>
+  <a class="logo" href="/"><span class="flower">✿</span>devene</a>
+  <div class="nav-links">
+    {links.map(l => (
+      <a class:list={['navlink', { active: current === l.page }]} href={l.href}>{l.label}</a>
+    ))}
+    <a class="btn nav-cta" href="/contact/">Start a project</a>
+  </div>
+  <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">menu ☰</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a class="navlink" href="/">home</a>
+  {links.map(l => (
+    <a class="navlink" href={l.href}>{l.label}</a>
+  ))}
+  <a class="navlink" href="/contact/">→ start a project</a>
+</div>
+
+<script>
+  const burger = document.getElementById('burgerBtn');
+  const menu = document.getElementById('mobileMenu');
+  burger?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+</script>

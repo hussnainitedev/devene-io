@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "devene-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "preview", "--", "--host"],
+      "port": 4321
+    },
+    {
+      "name": "sanity-studio",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "studio"],
+      "port": 3333
+    }
+  ]
+}

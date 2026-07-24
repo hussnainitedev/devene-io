@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCaseStudies } from '../lib/data.js';
+const cases = await getCaseStudies();
+const filters = [
+  { cat: 'all', label: 'all' },
+  { cat: 'data', label: 'data & bi' },
+  { cat: 'product', label: 'product' },
+  { cat: 'automation', label: 'automation' },
+  { cat: 'strategy', label: 'ai strategy' },
+];
+---
+<Base current="work" title="Case Studies — Devene.io" description="Real AI-powered software engagements across healthcare, energy, automotive, facilities, and B2B services. Proof, not promises.">
+  <div class="page-hero">
+    <span class="eyebrow">✌ case studies</span>
+    <h1>Proof, not <em>promises.</em></h1>
+    <p class="lead">Real engagements across the sectors we know best — AI strategy, custom software development, business intelligence, and automation. Details anonymised where clients prefer it; the results speak either way.</p>
+    <div class="filter-bar" role="group" aria-label="Filter case studies">
+      {filters.map((f, i) => (
+        <button class:list={['chip', { sel: i === 0 }]} data-filter={f.cat}>{f.label}</button>
+      ))}
+    </div>
+  </div>
+
+  <section style="padding-top:1rem" id="caseList">
+    {cases.map(c => (
+      <div class="case" data-cat={c.category}>
+        <div class="case-head"><h3>{c.title}</h3><span class="sector">{c.sector}</span></div>
+        <div class="case-body">
+          <div>
+            {c.body.map((p) => <p>{p}</p>)}
+          </div>
+          <div class="case-results">
+            {c.results.map(r => (
+              <div class="r"><div class="n">{r.n}</div><div class="l">{r.l}</div></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <div class="cta-band">
+    <section>
+      <span class="sun" aria-hidden="true">☼</span>
+      <h2>Your project could be <em>next on this page.</em></h2>
+      <a class="btn" href="/contact/" style="margin-top:1rem">Start a project</a>
+    </section>
+  </div>
+</Base>
+
+<script>
+  const chips = document.querySelectorAll('.filter-bar .chip');
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      chips.forEach((c) => c.classList.remove('sel'));
+      chip.classList.add('sel');
+      const cat = chip.getAttribute('data-filter');
+      document.querySelectorAll('#caseList .case').forEach((el) => {
+        const match = cat === 'all' || el.getAttribute('data-cat') === cat;
+        el.style.display = match ? '' : 'none';
+      });
+    });
+  });
+</script>

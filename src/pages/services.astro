@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import { getServices } from '../lib/data.js';
+const services = await getServices();
+---
+<Base current="services" title="Services — Devene.io" description="Seven ways Devene helps — AI strategy, product roadmapping, AI-powered development, data & BI, UX design, automation, and support. Delivered by senior humans, accelerated by AI.">
+  <div class="page-hero">
+    <span class="eyebrow">✌ services</span>
+    <h1>Everything you need. <em>Nothing you don't.</em></h1>
+    <p class="lead">Seven ways we help — each one delivered by senior humans with AI woven through the process. Tap any service to see what's inside.</p>
+  </div>
+
+  <section style="padding-top:1rem">
+    {services.map(s => (
+      <div class="svc-detail" id={s.id}>
+        <button class="svc-head" data-toggle>
+          <span class="glyph">{s.glyph}</span><h3>{s.title}</h3>
+          <span class:list={['tag', { ai: s.tagAi }]}>{s.tag}</span><span class="plus">+</span>
+        </button>
+        <div class="svc-body"><div class="svc-body-inner">
+          <div>
+            {s.body.map((p) => <p>{p}</p>)}
+          </div>
+          <div class="deliverables"><h4>What you walk away with</h4><ul>
+            {s.deliverables.map((d) => <li set:html={d} />)}
+          </ul></div>
+        </div></div>
+      </div>
+    ))}
+  </section>
+
+  <div class="cta-band">
+    <section>
+      <span class="sun" aria-hidden="true">☼</span>
+      <h2>Not sure which one <em>you need?</em></h2>
+      <p class="lead">That's normal — most projects touch three of these. Tell us the problem and we'll shape the engagement around it.</p>
+      <a class="btn" href="/contact/">Talk it through with us</a>
+    </section>
+  </div>
+</Base>
+
+<script>
+  document.querySelectorAll('[data-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => btn.closest('.svc-detail')?.classList.toggle('open'));
+  });
+
+  const hash = window.location.hash?.slice(1);
+  if (hash) {
+    const el = document.getElementById(hash);
+    if (el) {
+      el.classList.add('open');
+      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
+    }
+  }
+</script>

@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import { getFaqItems } from '../lib/data.js';
+const faqItems = await getFaqItems();
+---
+<Base current="process" title="How We Work — Devene.io" description="Slow thinking, fast shipping. Four movements, one rhythm, and three engagement models — from a seven-day first demo to ongoing product care.">
+  <div class="page-hero">
+    <span class="eyebrow">✌ how we work</span>
+    <h1>Slow thinking, <em>fast shipping.</em></h1>
+    <p class="lead">Four movements, one rhythm. AI accelerates every step — humans decide every step. Here's exactly what an engagement looks like, week by week.</p>
+  </div>
+
+  <section style="padding-top:1rem">
+    <div class="how-grid">
+      <div class="how-step"><span class="wk">week 1</span><span class="glyph">☮</span><h3>Tune in</h3><p>Deep discovery. We map your users, your data, and your actual problem — which is rarely the one in the brief. You meet the whole team, not a sales layer.</p></div>
+      <div class="how-step"><span class="wk">week 2</span><span class="glyph">✺</span><h3>Shape it</h3><p>Prototypes, architecture, and a roadmap with reasoning shown. We agree what we're building, what we're not, and how we'll know it worked.</p></div>
+      <div class="how-step"><span class="wk">weeks 3+</span><span class="glyph">✿</span><h3>Build with love</h3><p>Weekly demos of working software, not slideware. AI pair-builders keep velocity high; human review keeps quality higher.</p></div>
+      <div class="how-step"><span class="wk">forever</span><span class="glyph">☼</span><h3>Let it grow</h3><p>Launch is a beginning. Support, measurement, and monthly improvement releases — products are gardens, not monuments.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="section-label">ways to work with us</span>
+    <h2>Three shapes of <em>engagement.</em></h2>
+    <p class="lead">Every project is different, but most fit one of these. All of them come with the same people, the same honesty, and the same weekly rhythm.</p>
+    <div class="models">
+      <div class="model">
+        <h3>The Spark</h3><div class="for">for validating an idea</div>
+        <p>Two to four weeks of discovery, strategy, and a working prototype. Enough to know whether the idea deserves real investment.</p>
+        <ul><li>Discovery workshops</li><li>Clickable prototype</li><li>Technical feasibility read</li><li>Honest go / no-go recommendation</li></ul>
+        <a class="btn-ghost" href="/contact/">Start a Spark</a>
+      </div>
+      <div class="model hot">
+        <span class="badge">most popular</span>
+        <h3>The Build</h3><div class="for">for shipping a product</div>
+        <p>A dedicated squad — analyst, designer, engineers — delivering working software weekly until it's live and loved.</p>
+        <ul><li>Full cross-functional team</li><li>Weekly working demos</li><li>AI-accelerated delivery</li><li>Launch + 30 days of care included</li></ul>
+        <a class="btn" href="/contact/">Start a Build</a>
+      </div>
+      <div class="model">
+        <h3>The Garden</h3><div class="for">for the long haul</div>
+        <p>Ongoing partnership: support, continuous improvement, and a team that knows your product like their own.</p>
+        <ul><li>Named support engineers</li><li>Monthly improvement releases</li><li>Proactive monitoring</li><li>Roadmap reviews each quarter</li></ul>
+        <a class="btn-ghost" href="/contact/">Grow with us</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="section-label">questions, answered honestly</span>
+    <h2>The stuff people <em>actually ask.</em></h2>
+    <div class="faq">
+      {faqItems.map(f => (
+        <div class="faq-item">
+          <button class="faq-q" data-toggle>{f.q}<span class="plus">+</span></button>
+          <div class="faq-a"><p>{f.a}</p></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <section>
+      <span class="sun" aria-hidden="true">☼</span>
+      <h2>Ready when <em>you are.</em></h2>
+      <a class="btn" href="/contact/" style="margin-top:1rem">Start a project</a>
+    </section>
+  </div>
+</Base>
+
+<script>
+  document.querySelectorAll('.faq-q[data-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => btn.closest('.faq-item')?.classList.toggle('open'));
+  });
+</script>

@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import { getSiteSettings } from '../lib/data.js';
+const settings = await getSiteSettings();
+const topics = ['ai strategy', 'product roadmap', 'build software', 'data & bi', 'automation', 'design', 'support', 'not sure yet ✿'];
+---
+<Base current="contact" title="Contact — Devene.io" description="Tell us what's on your mind. A real human replies within a day.">
+  <div class="page-hero">
+    <span class="eyebrow">✌ say hello</span>
+    <h1>Good projects start with <em>good conversations.</em></h1>
+    <p class="lead">Tell us what's on your mind. A real human replies within a day — usually with more questions than answers, which is exactly how it should begin.</p>
+  </div>
+
+  <section style="padding-top:1rem">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <div class="item"><div class="k">email</div><div class="v">{settings.email}</div></div>
+        <div class="item"><div class="k">response time</div><div class="v">{settings.responseTime}</div></div>
+        <div class="item"><div class="k">first call</div><div class="v">{settings.firstCall}</div></div>
+        <div class="item"><div class="k">good to bring</div><div class="v">the problem, not the solution ✿</div></div>
+        <p class="lead" style="font-size:.95rem;margin-top:2rem">Prefer email? Just write to us like you'd write to a friend who happens to build software. That's roughly what this is.</p>
+      </div>
+
+      <div class="contact-form" id="contactForm">
+        <form id="formFields" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact" />
+          <p style="display:none"><label>Don't fill this out: <input name="bot-field" /></label></p>
+          <div class="field"><label for="f-name">your name</label><input id="f-name" name="name" type="text" placeholder="Jane Goodsoul" required></div>
+          <div class="field"><label for="f-email">your email</label><input id="f-email" name="email" type="email" placeholder="jane@company.com" required></div>
+          <div class="field">
+            <label>what's this about? (pick any)</label>
+            <div class="chips" id="topicChips">
+              {topics.map(t => <button type="button" class="chip" data-topic={t}>{t}</button>)}
+            </div>
+            <input type="hidden" name="topics" id="topicsField" />
+          </div>
+          <div class="field"><label for="f-msg">tell us about it</label><textarea id="f-msg" name="message" placeholder="What's the problem you're trying to solve? Rough timelines? Anything that keeps you up at night?"></textarea></div>
+          <button class="btn" type="submit" style="width:100%;text-align:center">Send it with love ☮</button>
+          <p class="form-note">No newsletters, no drip campaigns. Your message goes straight to a human.</p>
+        </form>
+        <div class="sent" id="sentMsg">
+          <span class="big">✿</span>
+          <h3>Message received, friend.</h3>
+          <p>A real human will reply within one working day.<br>Until then — peace, love, and version control.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const chipsWrap = document.getElementById('topicChips');
+  const topicsField = document.getElementById('topicsField');
+  const selected = new Set();
+  chipsWrap?.querySelectorAll('.chip').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const topic = chip.getAttribute('data-topic');
+      chip.classList.toggle('sel');
+      if (selected.has(topic)) selected.delete(topic); else selected.add(topic);
+      if (topicsField) topicsField.value = Array.from(selected).join(', ');
+    });
+  });
+
+  const form = document.getElementById('formFields');
+  const sent = document.getElementById('sentMsg');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data).toString() });
+    } catch {}
+    form.style.display = 'none';
+    sent?.classList.add('show');
+  });
+</script>

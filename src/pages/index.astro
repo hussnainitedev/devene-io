@@ -1,0 +1,189 @@
+---
+import Base from '../layouts/Base.astro';
+import { getServices, getTeamGroups, getBlogPosts, getTestimonials } from '../lib/data.js';
+
+const services = (await getServices()).slice(0, 4);
+const blogPosts = (await getBlogPosts()).slice(0, 3);
+const testimonials = await getTestimonials();
+---
+<Base current="home">
+  <header class="hero">
+    <span class="eyebrow">✌ an AI-powered software studio</span>
+    <h1>Software with <span class="soul">soul.</span></h1>
+    <p class="sub">Devene builds products the way good things get made — human minds up front, AI horsepower underneath. No factories. No feature mills. Just people who care, moving fast.</p>
+    <div class="hero-ctas">
+      <a class="btn" href="/contact/">Start a project</a>
+      <a class="btn-ghost" href="/people/">Meet the humans →</a>
+    </div>
+    <span class="scroll-hint">↓ scroll, friend</span>
+  </header>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>people over pixels</span><span>✿</span><span>humans + AI, in that order</span><span>☮</span><span>ship with love</span><span>✿</span><span>strategy before sprints</span><span>☮</span><span>people over pixels</span><span>✿</span><span>humans + AI, in that order</span><span>☮</span><span>ship with love</span><span>✿</span><span>strategy before sprints</span><span>☮</span>
+    </div>
+  </div>
+
+  <section class="center">
+    <span class="section-label">the vibe</span>
+    <h2>Most agencies sell <em>hours.</em><br>We sell outcomes, built by humans you'll actually know.</h2>
+    <p class="lead" style="font-family:var(--display);font-style:italic;font-size:clamp(1.3rem,3vw,1.9rem);line-height:1.4;color:var(--ink);max-width:28ch">Our product isn't our services. Our product is <span class="mark" style="font-style:normal;font-weight:700">our people</span> — amplified by AI, never replaced by it.</p>
+    <div class="stat-strip">
+      <div class="stat"><div class="n">2×</div><div class="l">faster delivery, AI-assisted</div></div>
+      <div class="stat"><div class="n">0</div><div class="l">account managers between you &amp; the team</div></div>
+      <div class="stat"><div class="n">7</div><div class="l">days to first working demo</div></div>
+      <div class="stat"><div class="n">100%</div><div class="l">human judgment on every decision</div></div>
+    </div>
+  </section>
+
+  <div class="sector-strip" aria-label="Sectors we serve">
+    <div class="sector-inner">
+      <span class="sector-label">at home in</span>
+      <span class="sector-item">healthcare &amp; pharma</span>
+      <span class="sector-item">renewable energy</span>
+      <span class="sector-item">motor auctions</span>
+      <span class="sector-item">facilities management</span>
+      <span class="sector-item">b2b services</span>
+      <span class="sector-item">fintech &amp; saas</span>
+    </div>
+  </div>
+
+  <section>
+    <span class="section-label">the devene difference</span>
+    <h2>Why teams pick us over the <em>usual suspects.</em></h2>
+    <p class="lead">Every agency claims speed, quality, and "partnership." Here's what that actually means when you strip the pitch deck away.</p>
+    <div class="diff-grid">
+      <div class="diff-row">
+        <div class="diff-them"><span class="diff-k">the usual agency</span><p>A senior team pitches. A junior team delivers. You find out in month two.</p></div>
+        <div class="diff-vs" aria-hidden="true">✿</div>
+        <div class="diff-us"><span class="diff-k">devene</span><p>The people on the first call are the people who do the work. There's no one to switch you to.</p></div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-them"><span class="diff-k">the usual agency</span><p>Bills by the hour, so the incentive is to take longer.</p></div>
+        <div class="diff-vs" aria-hidden="true">☮</div>
+        <div class="diff-us"><span class="diff-k">devene</span><p>Prices the outcome. AI acceleration makes us faster — and the savings are yours, not our margin.</p></div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-them"><span class="diff-k">the usual agency</span><p>Says yes to everything, then quietly descopes.</p></div>
+        <div class="diff-vs" aria-hidden="true">☼</div>
+        <div class="diff-us"><span class="diff-k">devene</span><p>Says no early, with reasons. Some of our best relationships started with us talking a client out of the brief.</p></div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-them"><span class="diff-k">the usual agency</span><p>"AI-powered" means a chatbot bolted onto the proposal.</p></div>
+        <div class="diff-vs" aria-hidden="true">✺</div>
+        <div class="diff-us"><span class="diff-k">devene</span><p>AI runs through discovery, build, testing, and support — with a human deciding at every gate.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="people-band">
+    <section>
+      <span class="section-label">humans + ai, in that order</span>
+      <h2>How the <em>amplifier</em> actually works.</h2>
+      <p class="lead">"AI-powered" is on every agency site this year. Here's what it concretely means inside a Devene engagement — and what stays human, always.</p>
+      <div class="amp-grid">
+        <div class="amp-col">
+          <h4 class="amp-h ai-h">⚡ what AI accelerates</h4>
+          <ul class="amp-list">
+            <li>First drafts of code, tests &amp; documentation</li>
+            <li>Research synthesis &amp; competitor scans</li>
+            <li>Data cleaning, mapping &amp; migration</li>
+            <li>Regression testing on every release</li>
+            <li>Meeting notes, specs &amp; status reporting</li>
+          </ul>
+        </div>
+        <div class="amp-col">
+          <h4 class="amp-h human-h">♡ what stays human</h4>
+          <ul class="amp-list">
+            <li>Understanding what you actually need</li>
+            <li>Architecture &amp; every design decision</li>
+            <li>Code review — every line, every time</li>
+            <li>Saying "this is a bad idea" to your face</li>
+            <li>Picking up the phone when things break</li>
+          </ul>
+        </div>
+      </div>
+      <p class="amp-footer">The math is simple: AI makes producing software cheap. Producing the <span style="color:var(--lime)">right</span> software is exactly as hard as it's always been. That part, we don't delegate.</p>
+    </section>
+  </div>
+
+  <section>
+    <span class="section-label">what we do</span>
+    <h2>Full-spectrum building, <em>AI-first</em> by default.</h2>
+    <p class="lead">A taste of the menu. Every engagement ships with AI baked into the process — that's how a small team of good people out-builds a big team of billable ones.</p>
+    <div class="services-list">
+      {services.map(s => (
+        <a class="service" href={`/services/#${s.id}`}>
+          <span class="glyph">{s.glyph}</span>
+          <div><h3>{s.title}</h3><p>{s.summary}</p></div>
+          <span class:list={['tag', { ai: s.tagAi }]}>{s.tag}</span>
+        </a>
+      ))}
+    </div>
+    <div style="margin-top:2rem"><a class="btn-ghost" href="/services/">See all seven services →</a></div>
+  </section>
+
+  <div class="people-band">
+    <section>
+      <span class="section-label">the real product</span>
+      <h2>Tools change every quarter.<br><em>Good people</em> compound forever.</h2>
+      <p class="lead">Anyone can rent an AI model. What can't be rented is judgment — people who've sat in the messy middle of real projects and know what to do next.</p>
+      <div class="people-grid">
+        <div class="person-card"><span class="num">who you get</span><div class="role">Business Analysts</div><p class="desc">Translators between what you say and what you need.</p></div>
+        <div class="person-card"><span class="num">who you get</span><div class="role">Product Designers</div><p class="desc">People who prototype before they pontificate.</p></div>
+        <div class="person-card"><span class="num">who you get</span><div class="role">AI Engineers</div><p class="desc">Builders who treat models as materials, not magic.</p></div>
+        <div class="person-card"><span class="num">who you get</span><div class="role">Support Engineers</div><p class="desc">The steady hands who keep everything running.</p></div>
+      </div>
+      <div style="margin-top:2.5rem"><a class="btn-ghost" style="color:var(--paper);border-color:var(--paper)" href="/people/">Meet the whole crew →</a></div>
+    </section>
+  </div>
+
+  <section>
+    <span class="section-label">the rhythm</span>
+    <h2>From first call to <em>first demo</em> in seven days.</h2>
+    <p class="lead">A taste of how engagements flow. The full week-by-week picture — and our three engagement models — live on the process page.</p>
+    <div class="how-grid">
+      <div class="how-step"><span class="wk">week 1</span><span class="glyph">☮</span><h3>Tune in</h3><p>Deep discovery. We find the real problem, which is rarely the one in the brief.</p></div>
+      <div class="how-step"><span class="wk">week 2</span><span class="glyph">✺</span><h3>Shape it</h3><p>Prototypes and a roadmap with the reasoning shown. We agree what we're not building, too.</p></div>
+      <div class="how-step"><span class="wk">weeks 3+</span><span class="glyph">✿</span><h3>Build with love</h3><p>Working software demoed every week. No slideware, no surprises.</p></div>
+      <div class="how-step"><span class="wk">forever</span><span class="glyph">☼</span><h3>Let it grow</h3><p>Support and monthly improvements. Products are gardens, not monuments.</p></div>
+    </div>
+    <div style="margin-top:2rem"><a class="btn-ghost" href="/process/">See the full process →</a></div>
+  </section>
+
+  <section>
+    <span class="section-label">thoughts from the studio</span>
+    <h2>Ideas we're <em>chewing on.</em></h2>
+    <p class="lead">Fresh from the blog — honest writing on AI, product, and delivery from the people doing the work.</p>
+    <div class="insight-grid">
+      {blogPosts.map(p => (
+        <a class="insight" href={`/blog/${p.slug}/`}>
+          <span class="insight-tag">{p.tag}</span>
+          <h3>{p.title}</h3>
+          <p>{p.excerpt}</p>
+          <span class="insight-more">read the article →</span>
+        </a>
+      ))}
+    </div>
+    <div style="margin-top:2rem"><a class="btn-ghost" href="/blog/">Visit the blog →</a></div>
+  </section>
+
+  <section>
+    <span class="section-label">kind words</span>
+    <h2>Clients say it <em>better.</em></h2>
+    <div class="quote-grid">
+      {testimonials.map(t => (
+        <div class="quote"><p>{t.quote}</p><div class="who">— {t.who}</div></div>
+      ))}
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <section>
+      <span class="sun" aria-hidden="true">☼</span>
+      <h2>Got something worth <em>building?</em></h2>
+      <p class="lead">A real human replies within a day — usually with more questions than answers, which is exactly how good projects start.</p>
+      <a class="btn" href="/contact/" style="font-size:1.02rem;padding:1rem 2.2rem">Start the conversation</a>
+    </section>
+  </div>
+</Base>

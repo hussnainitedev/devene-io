@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getBlogPosts } from '../../lib/data.js';
+import { marked } from 'marked';
+
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const bodyHtml = marked.parse(post.body);
+---
+<Base current="blog" title={`${post.title} — Devene.io Blog`} description={post.excerpt}>
+  <div class="page-hero" style="padding-bottom:1rem">
+    <a class="crumb" href="/blog/">← back to blog</a>
+    <span class="insight-tag" style="display:inline-block;margin-bottom:1.2rem">{post.tag}</span>
+    <h1 style="font-size:clamp(2rem,6vw,4.2rem)">{post.title}</h1>
+    <div class="post-meta" style="margin-top:1.2rem"><span>✿ {post.minutes} min read</span><span>·</span><span>by {post.author}</span></div>
+  </div>
+  <section style="padding-top:1rem">
+    <div class="article-body" set:html={bodyHtml} />
+    <div class="article-cta">
+      <span class="sun" aria-hidden="true" style="font-size:2rem">☼</span>
+      <h3 style="font-size:1.5rem;margin-bottom:.5rem">Wrestling with this in your own org?</h3>
+      <p style="color:var(--grey);margin-bottom:1.4rem">This is literally what we do all day. Thirty minutes, no slides, no sales team.</p>
+      <a class="btn" href="/contact/">Talk to a human</a>
+    </div>
+  </section>
+</Base>
